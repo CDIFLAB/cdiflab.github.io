@@ -19,9 +19,9 @@ window.LAB = {
   ],
   // Add photo: 'assets/people/name.jpg' for PI photos. Students are displayed without photos.
   pis: [
-    { name: 'Li Ni', role: 'Professor', photo: 'assets/pi-group.png', photoClass: 'portrait-group-centre', bio: '', url: '' },
-    { name: 'Ho Hann Woei', role: 'Professor', photo: 'assets/ho-hann-woei.png', bio: '', url: '' },
-    { name: 'Dong Changyin', role: 'Assoc. Prof.', photo: 'assets/dong-changyin.png', bio: '', url: '' }
+    { id: 'li-ni', name: 'Li Ni', role: 'Professor', photo: 'assets/pi-group.png', photoClass: 'portrait-group-centre', bio: '', url: '' },
+    { id: 'ho-hann-woei', name: 'Ho Hann Woei', role: 'Professor', photo: 'assets/ho-hann-woei.png', bio: '', url: '' },
+    { id: 'dong-changyin', name: 'Dong Changyin', role: 'Assoc. Prof.', photo: 'assets/dong-changyin.png', bio: '', url: '' }
   ],
   students: [], // { name: 'Full name', degree: 'PhD student', topic: 'Research topic' }
   publications: [], // { year: 2026, title: 'Paper title', authors: 'Authors', venue: 'Journal / conference', url: 'https://...', code: 'https://...' }

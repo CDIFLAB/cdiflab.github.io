@@ -24,3 +24,11 @@
 .pi-card .portrait-group-centre{object-fit:cover;object-position:center center}
 .pi-card>div:not(.placeholder){padding:0}.pi-card .eyebrow{color:var(--blue);margin-bottom:10px}.pi-card h3{font-size:24px;margin-bottom:10px}
 @media(max-width:760px){.pi-grid{grid-template-columns:1fr;gap:40px}.pi-card .portrait{width:220px;height:292px}}
+
+/* Individual PI profiles */
+.portrait-link{display:block;max-width:100%}.pi-card h3 a:hover{color:var(--blue)}
+.profile-page{padding:40px 0 70px}.profile-layout{display:grid;grid-template-columns:260px 1fr;gap:60px;margin-top:38px;align-items:start}
+.profile-layout .portrait{width:260px;height:345px;max-width:100%;object-fit:contain;object-position:center bottom;background:#f5f8fa}
+.profile-layout .portrait-group-centre{object-fit:cover;object-position:center}
+.profile-layout h1{font-size:clamp(32px,4vw,48px);margin-bottom:16px}.profile-role{font-size:20px;color:var(--blue);margin-bottom:20px}.profile-layout section{margin-top:35px;max-width:650px}
+@media(max-width:760px){.profile-layout{grid-template-columns:1fr;gap:30px}.profile-layout .portrait{width:220px;height:292px}}
