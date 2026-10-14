@@ -18,11 +18,19 @@ window.LAB = {
     { title: 'From ideas to airborne systems', date: '', category: 'SAMPLE · LAB LIFE', image: 'assets/systems.svg', text: 'Share a flight experiment, a new platform, or a behind-the-scenes look at the lab. This entry is a placeholder.' }
   ],
   // Add photo: 'assets/people/name.jpg' for PI photos. Students are displayed without photos.
-  pis: [
+  director: [
     { id: 'li-ni', name: 'Li Ni', role: 'Professor', photo: 'assets/pi-group.png', photoClass: 'portrait-group-centre', bio: '', url: '' },
+  ],
+  pis: [
     { id: 'ho-hann-woei', name: 'Ho Hann Woei', role: 'Professor', photo: 'assets/ho-hann-woei.png', bio: '', url: '' },
     { id: 'dong-changyin', name: 'Dong Changyin', role: 'Assoc. Prof.', photo: 'assets/dong-changyin.png', bio: '', url: '' }
   ],
+  fellows: [
+    { id: 'deng-yunshan', name: 'Deng YunShan', role: 'Dr.', photo: 'assets/deng-yunshan.jpg', bio: '', url: '' },
+    { id: 'jiang-hanjie', name: 'Jiang Hanjie', role: 'Dr.', photo: 'assets/jiang-hanjie.jpg', bio: '', url: '' }
+  ],
+  undergraduates: [],
+  alumni: [],
   students: [], // { name: 'Full name', degree: 'PhD student', topic: 'Research topic' }
   publications: [], // { year: 2026, title: 'Paper title', authors: 'Authors', venue: 'Journal / conference', url: 'https://...', code: 'https://...' }
   projects: [
