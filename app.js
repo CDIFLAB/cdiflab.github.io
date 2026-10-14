@@ -1,7 +1,7 @@
 const $ = (selector) => document.querySelector(selector);
 const esc = (value = '') => String(value).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const safeURL = value => /^(https?:\/\/|mailto:)/i.test(value || '') ? esc(value) : '';
-const date = value => value ? new Date(value + 'T12:00:00').toLocaleDateString('en-GB', {day:'numeric',month:'short',year:'numeric'}) : '';
+const date = value => value ? new Date(value + 'T12:00:00').toLocaleDateString(language === 'zh' ? 'zh-CN' : 'en-GB', {day:'numeric',month:'short',year:'numeric'}) : '';
 const link = (url, label) => safeURL(url) ? `<a class="text-link" href="${safeURL(url)}" target="_blank" rel="noopener noreferrer">${esc(label)} ↗</a>` : '';
 const empty = text => `<div class="empty-state">${text}</div>`;
 const heading = (eyebrow, title, subtitle) => `<section class="page-heading"><p class="eyebrow">${eyebrow}</p><h1>${title}</h1><p>${subtitle}</p></section>`;
@@ -34,7 +34,7 @@ function render() {
   const match = /^news\/(\d+)$/.exec(route);
   const item = match && LAB.news[Number(match[1])];
   $('#main').innerHTML = person ? profilePage(person) : item ? `<article class="news-detail"><a class="text-link" href="#home">← All highlights</a>${heading(esc(item.category),esc(item.title),date(item.date))}<img src="${esc(item.image)}" alt="Illustrative artwork"><p class="article-text">${esc(item.text)}</p></article>` : pages[route] ? pages[route]() : `${heading('PAGE NOT FOUND','Let’s get you back on course.','This page does not exist.')}<a class="button" href="#home">Return home</a>`;
-  document.title = `${person ? person.name : item ? item.title : ({home:LAB.shortName,about:'About',people:'People',publications:'Publications',projects:'Featured projects',resources:'Codes & datasets',jobs:'Jobs',contact:'Contact'}[route] || 'Page not found')} · ${LAB.name}`;
+  document.title = `${translate(person ? person.name : item ? item.title : ({home:LAB.shortName,about:'About',people:'People',publications:'Publications',projects:'Featured projects',resources:'Codes & datasets',jobs:'Jobs',contact:'Contact'}[route] || 'Page not found'))} · ${translate(LAB.name)}`;
   document.querySelectorAll('nav > a, .home-link').forEach(a => { if (a.hash === `#${person ? 'people' : route}`) a.setAttribute('aria-current','page'); else a.removeAttribute('aria-current'); });
   $('.menu-toggle').setAttribute('aria-expanded','false');
   $('#navigation').classList.remove('is-open');
@@ -43,6 +43,7 @@ function render() {
     document.querySelectorAll('[data-filter]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
     document.querySelectorAll('[data-type]').forEach(p=>p.hidden=button.dataset.filter!=='All' && p.dataset.type!==button.dataset.filter);
   }));
+  localizePage();
   window.scrollTo(0,0);
 }
 $('#social-links').innerHTML = socialMarkup();
@@ -51,5 +52,15 @@ $('.skip-link').addEventListener('click', e => { e.preventDefault(); $('#main').
 $('.menu-toggle').addEventListener('click', () => { const open = $('.menu-toggle').getAttribute('aria-expanded')!=='true'; $('.menu-toggle').setAttribute('aria-expanded',String(open)); $('#navigation').classList.toggle('is-open',open); });
 document.addEventListener('keydown', e => { if(e.key==='Escape') { $('.follow').open=false; $('#navigation').classList.remove('is-open'); $('.menu-toggle').setAttribute('aria-expanded','false'); } });
 document.addEventListener('click', e=>{ if(!e.target.closest('.follow')) $('.follow').open=false; });
+document.querySelectorAll('[data-language]').forEach(button => button.addEventListener('click', () => {
+  if (language === button.dataset.language) return;
+  const scrollPosition = window.scrollY;
+  const activeFilter = document.querySelector('[data-filter][aria-pressed="true"]')?.dataset.filter;
+  language = button.dataset.language;
+  try { localStorage.setItem('cdiflab-language', language); } catch (_) {}
+  render();
+  if (activeFilter) document.querySelector(`[data-filter="${activeFilter}"]`)?.click();
+  window.scrollTo(0, scrollPosition);
+}));
 window.addEventListener('hashchange',()=>{render();$('#main').focus({preventScroll:true});});
 render();
